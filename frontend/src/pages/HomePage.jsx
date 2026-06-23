@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import StatsAndFilters from "@/components/StatsAndFilters";
 import TaskList from "@/components/TaskList";
 import TaskListPagination from "@/components/TaskListPagination";
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import api from "@/lib/axios";
 import { visibleTaskLimit } from "@/lib/data";
@@ -18,15 +18,7 @@ const HomePage = () => {
   const [dateQuery, setDateQuery] = useState("today");
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchTasks();
-  }, [dateQuery]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [filter, dateQuery]);
-
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const res = await api.get("/tasks", {
         params: {
@@ -40,7 +32,11 @@ const HomePage = () => {
       console.error("Lỗi khi truy xuất tasks:", error);
       toast.error("Lỗi truy xuất tasks");
     }
-  };
+  }, [dateQuery]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [fetchTasks]);
 
   const handleTaskChanged = () => {
     fetchTasks();
@@ -62,6 +58,16 @@ const HomePage = () => {
     setPage(newPage);
   };
 
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setPage(1);
+  };
+
+  const handleDateQueryChange = (newDateQuery) => {
+    setDateQuery(newDateQuery);
+    setPage(1);
+  };
+
   const filteredTasks = taskBuffer.filter((task) => {
     switch (filter) {
       case "active":
@@ -73,16 +79,15 @@ const HomePage = () => {
     }
   });
 
-  const visibleTasks = filteredTasks.slice(
-    (page - 1) * visibleTaskLimit,
-    page * visibleTaskLimit,
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredTasks.length / visibleTaskLimit),
   );
-
-  if (visibleTasks.length === 0) {
-    handlePrev();
-  }
-
-  const totalPages = Math.ceil(filteredTasks.length / visibleTaskLimit);
+  const currentPage = Math.min(page, totalPages);
+  const visibleTasks = filteredTasks.slice(
+    (currentPage - 1) * visibleTaskLimit,
+    currentPage * visibleTaskLimit,
+  );
 
   return (
     <div className="min-h-screen w-full bg-[#020617] relative">
@@ -108,7 +113,7 @@ const HomePage = () => {
 
           <StatsAndFilters
             filter={filter}
-            setFilter={setFilter}
+            setFilter={handleFilterChange}
             activeTaskCount={activeTaskCount}
             completedTaskCount={completeTaskCount}
           />
@@ -124,11 +129,14 @@ const HomePage = () => {
               handleNext={handleNext}
               handlePrev={handlePrev}
               handlePageChange={handlePageChange}
-              page={page}
+              page={currentPage}
               totalPages={totalPages}
             />
 
-            <DateTimeFilter dateQuery={dateQuery} setDateQuery={setDateQuery} />
+            <DateTimeFilter
+              dateQuery={dateQuery}
+              setDateQuery={handleDateQueryChange}
+            />
           </div>
 
           <Footer

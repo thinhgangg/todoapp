@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = ({ completedTaskCount = 0, activeTaskCount = 0 }) => {
   return (
     <>

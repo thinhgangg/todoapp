@@ -1,4 +1,3 @@
-import React from "react";
 import TaskEmtyState from "./TaskEmtyState";
 import TaskCard from "./TaskCard";
 
