@@ -12,7 +12,7 @@ function Pagination({ className, ...props }) {
       role="navigation"
       aria-label="pagination"
       data-slot="pagination"
-      className={cn("mx-auto flex w-full justify-start", className)}
+      className={cn("mx-auto flex w-full justify-center", className)}
       {...props}
     />
   );

@@ -49,8 +49,8 @@ export const getAllTasks = async (req, res) => {
 
     res.status(200).json({ tasks, activeCount, completeCount });
   } catch (error) {
-    console.error("Lỗi khi gọi getAllTasks", error);
-    res.status(500).json({ message: "Lỗi hệ thống" });
+    console.error("Error in getAllTasks:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -62,8 +62,8 @@ export const createTask = async (req, res) => {
     const newTask = await task.save();
     res.status(200).json(newTask);
   } catch (error) {
-    console.error("Lỗi khi gọi createTask", error);
-    res.status(500).json({ message: "Lỗi hệ thống" });
+    console.error("Error in createTask:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -81,13 +81,13 @@ export const updateTask = async (req, res) => {
     );
 
     if (!updatedTask) {
-      return res.status(404).json({ message: "Nhiệm vụ không tồn tại" });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     res.status(200).json(updatedTask);
   } catch (error) {
-    console.error("Lỗi khi gọi updateTask", error);
-    res.status(500).json({ message: "Lỗi hệ thống" });
+    console.error("Error in updateTask:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -96,12 +96,12 @@ export const deleteTask = async (req, res) => {
     const deleteTask = await Task.findByIdAndDelete(req.params.id);
 
     if (!deleteTask) {
-      return res.status(404).json({ message: "Nhiệm vụ không tồn tại" });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     res.status(200).json(deleteTask);
   } catch (error) {
-    console.error("Lỗi khi gọi deleteTask", error);
-    res.status(500).json({ message: "Lỗi hệ thống" });
+    console.error("Error in deleteTask:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

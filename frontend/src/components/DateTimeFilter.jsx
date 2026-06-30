@@ -13,12 +13,12 @@ const DateTimeFilter = ({ dateQuery, setDateQuery }) => {
 
   return (
     <Combobox value={dateQuery} onValueChange={setDateQuery}>
-      <ComboboxTrigger className="flex h-9 min-w-36 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm cursor-pointer">
+      <ComboboxTrigger className="flex h-9 w-44 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm cursor-pointer">
         <ComboboxValue>
           {selectedOption?.label ?? "Select time range..."}
         </ComboboxValue>
       </ComboboxTrigger>
-      <ComboboxContent>
+      <ComboboxContent align="end" className="w-44! min-w-44!">
         <ComboboxList>
           {options.map((option) => (
             <ComboboxItem

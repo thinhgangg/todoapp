@@ -9,18 +9,16 @@ const TaskEmtyState = ({ filter }) => {
         <div>
           <h3 className="font-medium text-foreground">
             {filter === "active"
-              ? "Không có nhiệm vụ nào đang làm."
+              ? "No active tasks."
               : filter === "completed"
-                ? "Chưa có nhiệm vụ nào hoàn thành."
-                : "Chưa có nhiệm vụ nào."}
+                ? "No completed tasks."
+                : "No tasks yet."}
           </h3>
 
           <p className="text-sm text-muted-foreground">
             {filter === "all"
-              ? "Thêm nhiệm vụ đầu tiên để bắt đầu!"
-              : `Chuyển sang "tất cả" để thấy những nhiệm vụ ${
-                  filter === "active" ? "đang làm." : "đã hoàn thành."
-                }`}
+              ? "Add your first task to get started!"
+              : 'Switch to "All" to view all tasks.'}
           </p>
         </div>
       </div>

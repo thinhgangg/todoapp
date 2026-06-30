@@ -26,7 +26,7 @@ const NotFound = () => {
           href="/"
           className="inline-block px-6 py-3 mt-6 font-medium text-black bg-foreground rounded-2xl z-10"
         >
-          Quay về trang chủ
+          Back to Home
         </a>
       </div>
     </div>

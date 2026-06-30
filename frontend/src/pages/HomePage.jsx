@@ -29,8 +29,8 @@ const HomePage = () => {
       setActiveTaskCount(res.data.activeCount);
       setCompleteTaskCount(res.data.completeCount);
     } catch (error) {
-      console.error("Lỗi khi truy xuất tasks:", error);
-      toast.error("Lỗi truy xuất tasks");
+      console.error("Error fetching tasks:", error);
+      toast.error("Failed to fetch tasks");
     }
   }, [dateQuery]);
 
@@ -133,10 +133,12 @@ const HomePage = () => {
               totalPages={totalPages}
             />
 
-            <DateTimeFilter
-              dateQuery={dateQuery}
-              setDateQuery={handleDateQueryChange}
-            />
+            <div className="flex w-full justify-end sm:w-auto">
+              <DateTimeFilter
+                dateQuery={dateQuery}
+                setDateQuery={handleDateQueryChange}
+              />
+            </div>
           </div>
 
           <Footer

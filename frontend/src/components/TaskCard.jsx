@@ -20,11 +20,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
   const deleteTask = async (taskId) => {
     try {
       await api.delete(`/tasks/${taskId}`);
-      toast.success("Nhiệm vụ đã xóa thành công.");
+      toast.success("Task deleted successfully.");
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi xóa task.", error);
-      toast.error("Lỗi xảy ra khi xóa nhiệm vụ.");
+      console.error("Error occurred while deleting task.", error);
+      toast.error("Failed to delete task.");
     }
   };
 
@@ -34,11 +34,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
       await api.put(`/tasks/${task._id}`, {
         title: updateTaskTitle,
       });
-      toast.success("Cập nhật nhiệm vụ thành công.");
+      toast.success("Task updated successfully.");
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi cập nhật task.", error);
-      toast.error("Lỗi xảy ra khi cập nhật nhiệm vụ.");
+      console.error("Error occurred while updating task.", error);
+      toast.error("Failed to update task.");
     }
   };
 
@@ -50,20 +50,20 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
           completedAt: new Date().toISOString(),
         });
 
-        toast.success(`${task.title} đã hoàn thành.`);
+        toast.success(`"${task.title}" marked as completed.`);
       } else {
         await api.put(`/tasks/${task._id}`, {
           status: "active",
           completedAt: null,
         });
 
-        toast.success(`${task.title} đã được cập nhật.`);
+        toast.success(`"${task.title}" marked as active.`);
       }
 
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi cập nhật task.", error);
-      toast.error("Lỗi xảy ra khi cập nhật nhiệm vụ.");
+      console.error("Error occurred while updating task.", error);
+      toast.error("Failed to update task.");
     }
   };
 
@@ -82,7 +82,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
       style={{ animationDelay: `${index * 50}ms` }}
     >
       <div className="flex items-center gap-4">
-        {/* nút tròn */}
+        {/* status button */}
         <Button
           variant="ghost"
           size="icon"
@@ -106,7 +106,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
           {isEditting ? (
             <Input
               autoFocus
-              placeolder="What are you doing?"
+              placeholder="What needs to be done?"
               className="flex-1 h-9 text-base border-border/50 focus:border-primary/50 focus:ring-primary/20"
               type="text"
               value={updateTaskTitle}
@@ -131,7 +131,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
           )}
 
           {/* Date & Time */}
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1">
             <Calendar className="size-3 text-muted-foreground" />
             <span className="text-xs text-muted-foreground">
               {new Date(task.createdAt).toLocaleString()}
@@ -151,10 +151,10 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
         <div
           className={cn(
             "gap-2 animate-slide-up",
-            isEditting ? "inline-flex" : "hidden group-hover:inline-flex",
+            isEditting ? "flex" : "flex sm:hidden sm:group-hover:flex",
           )}
         >
-          {/* Nút edit */}
+          {/* Edit button */}
           <Button
             variant="ghost"
             size="icon"
@@ -167,7 +167,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
             <SquarePen className="size-4" />
           </Button>
 
-          {/* Nút xóa */}
+          {/* Delete button */}
           <Button
             variant="ghost"
             size="icon"

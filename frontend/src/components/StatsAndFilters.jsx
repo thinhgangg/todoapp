@@ -24,16 +24,16 @@ const StatsAndFilters = ({
         </Badge>
       </div>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex flex-row w-full gap-2 sm:w-auto">
         {Object.keys(FilterType).map((type) => (
           <Button
             key={type}
             variant={filter === type ? "default" : "ghost"}
             size="lg"
-            className="capitalize cursor-pointer"
+            className="capitalize cursor-pointer flex-1 justify-center sm:flex-initial"
             onClick={() => setFilter(type)}
           >
-            <Filter className="size-4" />
+            <Filter className="size-4 hidden sm:block" />
             {FilterType[type]}
           </Button>
         ))}

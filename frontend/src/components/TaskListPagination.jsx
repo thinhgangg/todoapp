@@ -41,7 +41,7 @@ const TaskListPagination = ({
   return (
     <Pagination>
       <PaginationContent>
-        {/* trang trước */}
+        {/* previous page */}
         <PaginationItem>
           <PaginationPrevious
             onClick={page === 1 ? undefined : handlePrev}
@@ -70,7 +70,7 @@ const TaskListPagination = ({
           </PaginationItem>
         ))}
 
-        {/* trang sau */}
+        {/* next page */}
         <PaginationItem>
           <PaginationNext
             onClick={page === totalPages ? undefined : handleNext}

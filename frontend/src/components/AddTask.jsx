@@ -14,16 +14,16 @@ const AddTask = ({ handleNewTaskAdded }) => {
         await api.post("/tasks", {
           title: newTaskTitle,
         });
-        toast.success(`Nhiệm vụ ${newTaskTitle} đã được thêm vào.`);
+        toast.success(`Task "${newTaskTitle}" created successfully.`);
         handleNewTaskAdded();
       } catch (error) {
-        console.error("Lỗi xảy ra khi thêm task.", error);
-        toast.error("Lỗi khi thêm nhiệm vụ.");
+        console.error("Error occurred while adding task.", error);
+        toast.error("Failed to add task.");
       }
 
       setNewTaskTitle("");
     } else {
-      toast.error("Bạn cần nhập nội dung của nhiệm vụ.");
+      toast.error("Task title cannot be empty.");
     }
   };
 
@@ -38,7 +38,7 @@ const AddTask = ({ handleNewTaskAdded }) => {
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           type="text"
-          placeholder="What are you doing?"
+          placeholder="What needs to be done?"
           className="h-9 text-base sm:flex-1 border-border/50 focus:border-primary/50 focus:ring-primary/20"
           value={newTaskTitle}
           onChange={(event) => setNewTaskTitle(event.target.value)}
