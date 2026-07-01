@@ -1,10 +1,10 @@
-# 📝 Todo App - Ứng dụng Quản lý Công việc Hiện đại
+# Todo App - Ứng dụng Quản lý Công việc Hiện đại
 
 Đây là một ứng dụng **Fullstack To-do App** trực quan, hiện đại và tối ưu, được xây dựng theo kiến trúc Client-Server. Dự án sử dụng **Node.js, Express, MongoDB** ở Backend và **React, Vite, Tailwind CSS v4** ở Frontend.
 
 ---
 
-## 🚀 Tính năng nổi bật
+## Tính năng nổi bật
 
 - **Quản lý công việc (CRUD):** Thêm mới, cập nhật trạng thái và xóa các nhiệm vụ dễ dàng.
 - **Bộ lọc thông minh:**
@@ -16,7 +16,7 @@
 
 ---
 
-## 🛠️ Công nghệ sử dụng
+## Công nghệ sử dụng
 
 ### **Backend**
 - **Node.js** & **Express**: Xây dựng hệ thống RESTful API dưới dạng ES Modules (`"type": "module"`).
@@ -36,7 +36,7 @@
 
 ---
 
-## 📁 Cấu trúc thư mục dự án
+## Cấu trúc thư mục dự án
 
 ```text
 todoapp/
@@ -62,13 +62,13 @@ todoapp/
 │   ├── vite.config.js        # Cấu hình Vite
 │   └── package.json
 │
-├── package.json              # File package gốc quản lý kịch bản build/chạy ứng dụng toàn cục
-└── README.md                 # Tài liệu hướng dẫn dự án (File này)
+├── package.json              
+└── README.md                 
 ```
 
 ---
 
-## ⚙️ Hướng dẫn cài đặt và chạy ứng dụng
+## Hướng dẫn cài đặt và chạy ứng dụng
 
 ### **1. Chuẩn bị trước**
 Đảm bảo máy tính của bạn đã được cài đặt:
@@ -131,7 +131,7 @@ Giao diện frontend sẽ chạy tại: [http://localhost:5173](http://localhost
 
 ---
 
-## 📌 Các Endpoints API Chính
+## Các Endpoints API Chính
 
 Tất cả các endpoints API của hệ thống đều bắt đầu bằng tiền tố `/api/tasks`.
 
